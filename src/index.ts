@@ -1,18 +1,9 @@
+import { Result } from "@mikuroxina/mini-fn";
 import { Hono } from "hono";
 
-const DISCORD_API = "https://discord.com/api/v10";
-
-async function revoke(token: string) {
-    await fetch(DISCORD_API + "/oauth2/token/revoke", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-            token,
-        }),
-    });
-}
+import { withDiscordRepository } from "./adaptors/discord";
+import { R2Store } from "./adaptors/r2";
+import { patchMembers } from "./services/patch-members";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -37,60 +28,15 @@ app.patch("/members", async (c) => {
     }
     const { token } = body;
 
-    const meRes = await fetch(DISCORD_API + "/users/@me", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+    const store = new R2Store(c.env.ASSOC_BUCKET);
+    return await withDiscordRepository<Response>(token)(async (repo) => {
+        const result = await patchMembers(repo, store);
+        if (Result.isErr(result)) {
+            console.error(result[1]);
+            return c.text("Internal Server Error", 500);
+        }
+        return c.text("OK", 200);
     });
-    interface User {
-        // https://discord.com/developers/docs/resources/user#user-object-user-structure
-        id: string;
-        [key: string]: unknown;
-    }
-    const me: User = await meRes.json();
-
-    const connectionsRes = await fetch(DISCORD_API + "/users/@me/connections", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    interface Connection {
-        // https://discord.com/developers/docs/resources/user#connection-object-connection-structure
-        id: string;
-        name: string;
-        type: string;
-        [key: string]: unknown;
-    }
-    const connections: Connection[] = await connectionsRes.json();
-
-    const ASSOCIATION_TYPES = ["twitter", "github"] as const;
-    type AssociationType = (typeof ASSOCIATION_TYPES)[number];
-    const checkAssociationType = (type: string): type is AssociationType =>
-        (ASSOCIATION_TYPES as readonly string[]).includes(type);
-    interface AssociatedLink {
-        type: AssociationType;
-        id: string;
-        name: string;
-    }
-    const checkAssociationLink = (link: {
-        type: string;
-        id: string;
-        name: string;
-    }): link is AssociatedLink => checkAssociationType(link.type);
-    interface Member {
-        discordId: string;
-        associatedLinks: AssociatedLink[];
-    }
-    const member = {
-        discordId: me.id,
-        associatedLinks: connections
-            .map(({ type, id, name }) => ({ type, id, name }))
-            .filter(checkAssociationLink),
-    } satisfies Member;
-    c.env.ASSOC_BUCKET.put(me.id, JSON.stringify(member));
-
-    await revoke(token);
-    return c.text("OK", 200);
 });
 
 export default app;
