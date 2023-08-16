@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "wrangler dev src/index.ts",
-        "deploy": "wrangler deploy --minify src/index.ts"
+        "dev": "wrangler dev src/index.tsx",
+        "deploy": "wrangler deploy --minify src/index.tsx"
     },
     "dependencies": {
         "@mikuroxina/mini-fn": "^4.1.1",

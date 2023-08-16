@@ -4,6 +4,7 @@ import { Hono } from "hono";
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
 import { patchMembers } from "./services/patch-members";
+import { Index } from "./pages";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -13,7 +14,7 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.get("/", (c) => c.text("Hello Hono!"));
+app.get("/", (c) => c.html(<Index />));
 app.patch("/members", async (c) => {
     const body = await c.req.json();
     const checkToken = (body: unknown): body is { token: string } =>
