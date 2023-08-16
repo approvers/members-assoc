@@ -1,0 +1,14 @@
+name = "members-assoc"
+main = "src/index.ts"
+compatibility_date = "2023-08-16"
+
+r2_buckets = [{ binding = "ASSOC_BUCKET", bucket_name = "members-assoc" }]
+
+[vars]
+DISCORD_CLIENT_ID = "1141210184505639003"
+
+[dev]
+port = 3000
+
+[env.staging]
+r2_buckets = [{ binding = "ASSOC_BUCKET", bucket_name = "members-assoc-test" }]
