@@ -1,5 +1,6 @@
 import { Result } from "@mikuroxina/mini-fn";
 import { Hono } from "hono";
+import { serveStatic } from "hono/cloudflare-workers";
 
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
@@ -14,6 +15,7 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+app.use("/static/*", serveStatic({ root: "./" }));
 app.get("/", (c) => c.html(<Index />));
 app.patch("/members", async (c) => {
     const body = await c.req.json();

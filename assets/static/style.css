@@ -1,0 +1,27 @@
+html {
+    width: min(90svw, 60rem);
+    margin: 0 auto;
+}
+
+p {
+    font-size: 115%;
+    line-height: 1.6;
+}
+
+button {
+    cursor: pointer;
+    display: block;
+    padding: 18px;
+    margin: 0 auto;
+    font-size: 250%;
+    font-weight: bold;
+    border: 0;
+    border-radius: 9999px;
+    background-color: #222;
+    color: #eee;
+    box-shadow: #777 4px 4px 16px;
+}
+
+button:active {
+    box-shadow: unset;
+}

@@ -6,6 +6,9 @@ r2_buckets = [
     { binding = "ASSOC_BUCKET", bucket_name = "members-assoc", preview_bucket_name = "members-assoc-test" },
 ]
 
+[site]
+bucket = "./assets"
+
 [vars]
 DISCORD_CLIENT_ID = "1141210184505639003"
 

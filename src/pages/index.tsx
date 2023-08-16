@@ -1,7 +1,10 @@
 export const Index = (): JSX.Element => (
     <html lang="ja">
         <head>
+            <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title>Approvers メンバー情報登録</title>
+            <link rel="stylesheet" href="/static/style.css" />
         </head>
         <body>
             <h1>Approvers メンバー情報登録</h1>
