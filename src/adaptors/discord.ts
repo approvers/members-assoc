@@ -1,7 +1,7 @@
 import { Cont, Promise } from "@mikuroxina/mini-fn";
 
 import type { Repository } from "../services";
-import type { Connection, User } from "../services/patch-members";
+import type { Connection, GuildMember, User } from "../services/patch-members";
 
 export const withDiscordRepository =
     <T>(token: string): Cont.ContT<T, Promise.PromiseHkt, Repository> =>
@@ -33,6 +33,20 @@ const newRepo = (token: string): Repository => ({
             },
         );
         return await connectionsRes.json();
+    },
+    async guildMember(guildId): Promise<GuildMember | undefined> {
+        const connectionsRes = await fetch(
+            DISCORD_API + `/users/@me/guilds/${guildId}/member`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+        if (!connectionsRes.ok) {
+            return undefined;
+        }
+        return connectionsRes.json();
     },
 });
 

@@ -11,14 +11,20 @@ export interface Connection {
     name: string;
     type: string;
 }
+export interface GuildMember {
+    roles: string[];
+}
 
 export interface Repository {
     user(): Promise<User>;
     connections(): Promise<Connection[]>;
+    guildMember(guildId: string): Promise<GuildMember | undefined>;
 }
 export interface Store {
     put(id: string, entry: unknown): Promise<void>;
 }
+
+const APPROVERS_GUILD_ID = "683939861539192860";
 
 export const patchMembers = async (
     repository: Repository,
@@ -26,6 +32,10 @@ export const patchMembers = async (
 ): Promise<Result.Result<Error, []>> => {
     const me = await repository.user();
     const connections = await repository.connections();
+    const guildMember = await repository.guildMember(APPROVERS_GUILD_ID);
+    if (!guildMember || guildMember.roles.length === 0) {
+        return Result.err(new Error("the user did not join to Approvers"));
+    }
 
     const member = {
         discordId: me.id,
