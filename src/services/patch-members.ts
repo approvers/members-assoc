@@ -4,6 +4,7 @@ import { type Member, checkAssociationLink } from "../models";
 
 export interface User {
     id: string;
+    username: string;
 }
 export interface Connection {
     id: string;
@@ -28,6 +29,7 @@ export const patchMembers = async (
 
     const member = {
         discordId: me.id,
+        username: me.username,
         associatedLinks: connections
             .map(({ type, id, name }) => ({ type, id, name }))
             .filter(checkAssociationLink),
