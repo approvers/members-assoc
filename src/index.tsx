@@ -6,6 +6,7 @@ import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
 import { patchMembers } from "./services/patch-members";
 import { Index } from "./pages";
+import { Done } from "./pages/done";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -17,6 +18,44 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 app.use("/static/*", serveStatic({ root: "./" }));
 app.get("/", (c) => c.html(<Index />));
+app.get("/done", (c) => c.html(<Done />));
+app.get("/redirect", async (c) => {
+    const code = c.req.query("code");
+    if (!code) {
+        return c.text("Bad Request", 400);
+    }
+
+    const tokenRes = await fetch("https://discord.com/api/v10/oauth2/token", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            client_id: c.env.DISCORD_CLIENT_ID,
+            client_secret: c.env.DISCORD_CLIENT_SECRET,
+            grant_type: "authorization_code",
+            code,
+            redirect_uri: "http://127.0.0.1:3000/redirect",
+        }),
+    });
+    const json = await tokenRes.json<{ access_token: string; }>();
+
+    const patchRes = await fetch("http://127.0.0.1:3000/members", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            token: json.access_token,
+        })
+    });
+
+    if (!patchRes.ok) {
+        return c.text("Internal Server Error", 500);
+    }
+
+    return c.redirect("/done");
+});
 app.patch("/members", async (c) => {
     const body = await c.req.json();
     const checkToken = (body: unknown): body is { token: string } =>
