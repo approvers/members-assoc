@@ -8,6 +8,10 @@ p {
     line-height: 1.6;
 }
 
+a {
+    text-decoration: none;
+}
+
 button {
     cursor: pointer;
     display: block;
