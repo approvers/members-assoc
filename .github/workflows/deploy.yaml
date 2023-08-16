@@ -1,0 +1,26 @@
+name: Deploy site to Cloudflare Workers
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    deploy-main:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: ^8.6.12
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: pnpm
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Deploy
+              uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CF_API_TOKEN }}
