@@ -1,5 +1,6 @@
 name = "members-assoc"
 main = "src/index.tsx"
+minify = true
 compatibility_date = "2023-06-28"
 
 r2_buckets = [
