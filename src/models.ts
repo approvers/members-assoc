@@ -17,5 +17,6 @@ export const checkAssociationLink = (link: {
 
 export interface Member {
     discordId: string;
+    username: string;
     associatedLinks: AssociatedLink[];
 }
