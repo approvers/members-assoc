@@ -7,6 +7,7 @@ import { R2Store } from "./adaptors/r2";
 import { patchMembers } from "./services/patch-members";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
+import type { Member } from "./models";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -50,6 +51,28 @@ app.get("/redirect", async (c) => {
         }
         return c.redirect("/done");
     });
+});
+
+app.get("/members", async (c) => {
+    const { objects } = await c.env.ASSOC_BUCKET.list();
+    const ids = objects.map(({key}) => key);
+    const members = (await Promise.all(ids.map(async (id) => {
+        const body = await c.env.ASSOC_BUCKET.get(id);
+        if (body == null) {
+            return [];
+        }
+        return [await body.json<Member>()];
+    }
+    ))).flat();
+    return c.json(members);
+});
+app.get("/members/:id", async (c) => {
+    const id = c.req.param("id");
+    const body = await c.env.ASSOC_BUCKET.get(id);
+    if (body == null) {
+        return c.notFound();
+    }
+    return c.json(await body.json<Member>());
 });
 
 export default app;
