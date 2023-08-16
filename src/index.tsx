@@ -52,4 +52,20 @@ app.get("/redirect", async (c) => {
     });
 });
 
+app.get("/members", async (c) => {
+    const { objects } = await c.env.ASSOC_BUCKET.list();
+    return c.json(objects);
+});
+app.get("/members/:id", async (c) => {
+    const id = c.req.param("id");
+    const { objects } = await c.env.ASSOC_BUCKET.list({
+        limit: 1,
+        prefix: id,
+    });
+    if (objects.length < 1) {
+        return c.notFound();
+    }
+    return c.json(objects[0]);
+});
+
 export default app;
