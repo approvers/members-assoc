@@ -51,6 +51,7 @@ app.get("/redirect", async (c) => {
     });
 
     if (!patchRes.ok) {
+        console.error(json);
         console.error(await patchRes.text());
         return c.text("Internal Server Error", 500);
     }
