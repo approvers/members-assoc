@@ -40,46 +40,15 @@ app.get("/redirect", async (c) => {
     });
     const json = await tokenRes.json<{ access_token: string; }>();
 
-    const patchRes = await fetch(new URL("/members", c.req.url), {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            token: json.access_token,
-        })
-    });
-
-    if (!patchRes.ok) {
-        console.error(json);
-        console.error(await patchRes.text());
-        return c.text("Internal Server Error", 500);
-    }
-
-    return c.redirect("/done");
-});
-app.patch("/members", async (c) => {
-    const body = await c.req.json();
-    const checkToken = (body: unknown): body is { token: string } =>
-        typeof body === "object" &&
-        body !== null &&
-        "token" in body &&
-        typeof body.token === "string";
-    if (!checkToken(body)) {
-        return c.text("bad Request", 400, {
-            "X-Debug": "token required",
-        });
-    }
-    const { token } = body;
 
     const store = new R2Store(c.env.ASSOC_BUCKET);
-    return await withDiscordRepository<Response>(token)(async (repo) => {
+    return await withDiscordRepository<Response>(json.access_token)(async (repo) => {
         const result = await patchMembers(repo, store);
         if (Result.isErr(result)) {
             console.error(result[1]);
             return c.text("Internal Server Error", 500);
         }
-        return c.text("OK", 200);
+        return c.redirect("/done");
     });
 });
 
