@@ -1,0 +1,22 @@
+openapi: "3.1.0"
+
+info:
+    title: "members-assoc"
+    description: "Manages and associates our identity with SNS accounts."
+    version: "0.1.0"
+
+servers:
+    - url: "http://localhost:3000"
+      description: "Local debug environment"
+    - url: "https://member.approvers.dev"
+      description: "Deployed production environment"
+
+tags:
+    - name: "member"
+      description: "Manipulations about members."
+    - name: "associations"
+      description: "Manipulations about links associated to a member."
+
+paths: {} # TODO
+
+components: {} # TODO

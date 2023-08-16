@@ -1,0 +1,22 @@
+{
+    "name": "members-assoc",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "wrangler dev src/index.ts",
+        "deploy": "wrangler deploy --minify src/index.ts"
+    },
+    "dependencies": {
+        "hono": "^3.4.1"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20230628.0",
+        "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+        "@typescript-eslint/eslint-plugin": "^6.4.0",
+        "@typescript-eslint/parser": "^6.4.0",
+        "eslint": "^8.47.0",
+        "prettier": "^3.0.2",
+        "typescript": "^5.1.6",
+        "wrangler": "^3.1.2"
+    }
+}
