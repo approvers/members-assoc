@@ -4,5 +4,7 @@ dist
 .wrangler
 
 # package
-wrangler.toml
 pnpm-lock.yaml
+
+# env
+.dev.vars
