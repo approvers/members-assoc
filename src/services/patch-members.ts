@@ -1,6 +1,6 @@
 import { Result } from "@mikuroxina/mini-fn";
 
-import { type Member, checkAssociationLink } from "../models";
+import { checkAssociationLink, type Member } from "../models";
 
 export interface User {
     id: string;

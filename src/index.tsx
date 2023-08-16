@@ -4,10 +4,10 @@ import { serveStatic } from "hono/cloudflare-workers";
 
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
-import { patchMembers } from "./services/patch-members";
+import type { Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
-import type { Member } from "./models";
+import { patchMembers } from "./services/patch-members";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -39,31 +39,35 @@ app.get("/redirect", async (c) => {
             redirect_uri: new URL("/redirect", c.req.url).toString(),
         }),
     });
-    const json = await tokenRes.json<{ access_token: string; }>();
-
+    const json = await tokenRes.json<{ access_token: string }>();
 
     const store = new R2Store(c.env.ASSOC_BUCKET);
-    return await withDiscordRepository<Response>(json.access_token)(async (repo) => {
-        const result = await patchMembers(repo, store);
-        if (Result.isErr(result)) {
-            console.error(result[1]);
-            return c.text("Internal Server Error", 500);
-        }
-        return c.redirect("/done");
-    });
+    return await withDiscordRepository<Response>(json.access_token)(
+        async (repo) => {
+            const result = await patchMembers(repo, store);
+            if (Result.isErr(result)) {
+                console.error(result[1]);
+                return c.text("Internal Server Error", 500);
+            }
+            return c.redirect("/done");
+        },
+    );
 });
 
 app.get("/members", async (c) => {
     const { objects } = await c.env.ASSOC_BUCKET.list();
-    const ids = objects.map(({key}) => key);
-    const members = (await Promise.all(ids.map(async (id) => {
-        const body = await c.env.ASSOC_BUCKET.get(id);
-        if (body == null) {
-            return [];
-        }
-        return [await body.json<Member>()];
-    }
-    ))).flat();
+    const ids = objects.map(({ key }) => key);
+    const members = (
+        await Promise.all(
+            ids.map(async (id) => {
+                const body = await c.env.ASSOC_BUCKET.get(id);
+                if (body == null) {
+                    return [];
+                }
+                return [await body.json<Member>()];
+            }),
+        )
+    ).flat();
     return c.json(members);
 });
 app.get("/members/:id", async (c) => {
