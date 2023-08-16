@@ -14,8 +14,13 @@ export const Index = ({ requestUrl }: { requestUrl: string }): JSX.Element => {
                 OAuth を利用しており,
                 下記のボタンから当サービスでのトークンの利用を認可していただくことで登録処理を開始できます.
             </p>
-            <a href={redirectUrl} referrerPolicy="no-referrer" rel="noopener">
-                <button>アカウント情報を登録する</button>
+            <a
+                class="big-button"
+                href={redirectUrl}
+                referrerPolicy="no-referrer"
+                rel="noopener"
+            >
+                アカウント情報を登録する
             </a>
         </Layout>
     );

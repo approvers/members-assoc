@@ -8,15 +8,12 @@ p {
     line-height: 1.6;
 }
 
-a {
+.big-button {
     text-decoration: none;
-}
-
-button {
+    text-align: center;
     cursor: pointer;
     display: block;
     padding: 18px;
-    margin: 0 auto;
     font-size: 250%;
     font-weight: bold;
     border: 0;
@@ -26,6 +23,6 @@ button {
     box-shadow: #777 4px 4px 16px;
 }
 
-button:active {
+.big-button:active {
     box-shadow: unset;
 }
