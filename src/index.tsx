@@ -17,7 +17,7 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.use("/static/*", serveStatic({ root: "./" }));
-app.get("/", (c) => c.html(<Index />));
+app.get("/", (c) => c.html(<Index requestUrl={c.req.url} />));
 app.get("/done", (c) => c.html(<Done />));
 app.get("/redirect", async (c) => {
     const code = c.req.query("code");
@@ -35,12 +35,12 @@ app.get("/redirect", async (c) => {
             client_secret: c.env.DISCORD_CLIENT_SECRET,
             grant_type: "authorization_code",
             code,
-            redirect_uri: "http://127.0.0.1:3000/redirect",
+            redirect_uri: new URL("/redirect", c.req.url).toString(),
         }),
     });
     const json = await tokenRes.json<{ access_token: string; }>();
 
-    const patchRes = await fetch("http://127.0.0.1:3000/members", {
+    const patchRes = await fetch(new URL("/members", c.req.url), {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
