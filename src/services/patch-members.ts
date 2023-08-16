@@ -1,6 +1,6 @@
 import { Result } from "@mikuroxina/mini-fn";
 
-import { checkAssociationLink, type Member } from "../models";
+import { type AppError, checkAssociationLink, type Member } from "../models";
 
 export interface User {
     id: string;
@@ -29,12 +29,12 @@ const APPROVERS_GUILD_ID = "683939861539192860";
 export const patchMembers = async (
     repository: Repository,
     store: Store,
-): Promise<Result.Result<Error, []>> => {
+): Promise<Result.Result<AppError, []>> => {
     const me = await repository.user();
     const connections = await repository.connections();
     const guildMember = await repository.guildMember(APPROVERS_GUILD_ID);
     if (!guildMember || guildMember.roles.length === 0) {
-        return Result.err(new Error("the user did not join to Approvers"));
+        return Result.err("NOT_JOINED_TO_APPROVERS");
     }
 
     const member = {

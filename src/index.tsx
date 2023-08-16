@@ -4,9 +4,10 @@ import { serveStatic } from "hono/cloudflare-workers";
 
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
-import type { Member } from "./models";
+import { checkAppError, type Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
+import { Error } from "./pages/error";
 import { patchMembers } from "./services/patch-members";
 
 type Bindings = {
@@ -20,6 +21,13 @@ const app = new Hono<{ Bindings: Bindings }>();
 app.use("/static/*", serveStatic({ root: "./" }));
 app.get("/", (c) => c.html(<Index requestUrl={c.req.url} />));
 app.get("/done", (c) => c.html(<Done />));
+app.get("/error", (c) => {
+    const details = c.req.query("details");
+    if (!details || !checkAppError(details)) {
+        return c.redirect("/");
+    }
+    return c.html(<Error details={details} />);
+});
 app.get("/redirect", async (c) => {
     const code = c.req.query("code");
     if (!code) {
@@ -46,8 +54,12 @@ app.get("/redirect", async (c) => {
         async (repo) => {
             const result = await patchMembers(repo, store);
             if (Result.isErr(result)) {
-                console.error(result[1]);
-                return c.text("Internal Server Error", 500);
+                return c.redirect(
+                    "/error?" +
+                        new URLSearchParams({
+                            details: result[1],
+                        }),
+                );
             }
             return c.redirect("/done");
         },
