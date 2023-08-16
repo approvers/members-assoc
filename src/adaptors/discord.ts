@@ -1,16 +1,16 @@
 import { Cont, Promise } from "@mikuroxina/mini-fn";
 
 import type { Repository } from "../services";
-import type { User, Connection } from "../services/patch-members";
+import type { Connection, User } from "../services/patch-members";
 
 export const withDiscordRepository =
     <T>(token: string): Cont.ContT<T, Promise.PromiseHkt, Repository> =>
-        async (repoUser: (repo: Repository) => Promise<T>): Promise<T> => {
-            const repo = newRepo(token);
-            const result = await repoUser(repo);
-            await revoke(token);
-            return result;
-        };
+    async (repoUser: (repo: Repository) => Promise<T>): Promise<T> => {
+        const repo = newRepo(token);
+        const result = await repoUser(repo);
+        await revoke(token);
+        return result;
+    };
 
 const DISCORD_API = "https://discord.com/api/v10";
 
