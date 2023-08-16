@@ -4,7 +4,10 @@
     "private": true,
     "scripts": {
         "dev": "wrangler dev src/index.tsx",
-        "deploy": "wrangler deploy --minify src/index.tsx"
+        "deploy": "wrangler deploy --minify src/index.tsx",
+        "lint": "eslint \"src/**/*.{ts,tsx}\"",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+        "check": "tsc --noEmit"
     },
     "dependencies": {
         "@mikuroxina/mini-fn": "^4.1.1",
@@ -16,6 +19,8 @@
         "@typescript-eslint/eslint-plugin": "^6.4.0",
         "@typescript-eslint/parser": "^6.4.0",
         "eslint": "^8.47.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-react": "^7.33.2",
         "prettier": "^3.0.2",
         "typescript": "^5.1.6",
         "wrangler": "^3.1.2"
