@@ -10,5 +10,6 @@ export const Error = ({ details }: { details: AppError }): JSX.Element => (
     <Layout title="Approvers メンバー情報登録 - 登録失敗">
         <h1>登録失敗</h1>
         <p>{DESCRIPTIONS[details]}</p>
+        <a href="/">トップに戻る</a>
     </Layout>
 );
