@@ -1,0 +1,16 @@
+name = "members-assoc"
+main = "src/index.tsx"
+compatibility_date = "2023-06-28"
+
+r2_buckets = [
+    { binding = "ASSOC_BUCKET", bucket_name = "members-assoc", preview_bucket_name = "members-assoc-test" },
+]
+
+[site]
+bucket = "./assets"
+
+[vars]
+DISCORD_CLIENT_ID = "1141210184505639003"
+
+[dev]
+port = 3000
