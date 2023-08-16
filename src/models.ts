@@ -20,3 +20,8 @@ export interface Member {
     username: string;
     associatedLinks: AssociatedLink[];
 }
+
+const APP_ERRORS = ["NOT_JOINED_TO_APPROVERS"] as const;
+export type AppError = (typeof APP_ERRORS)[number];
+export const checkAppError = (variant: string): variant is AppError =>
+    (APP_ERRORS as readonly string[]).includes(variant);
