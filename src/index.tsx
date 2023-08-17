@@ -1,6 +1,8 @@
 import { Result } from "@mikuroxina/mini-fn";
+import { sign, verify } from "@tsndr/cloudflare-worker-jwt";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
+import { getCookie, setCookie } from "hono/cookie";
 
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
@@ -14,6 +16,7 @@ type Bindings = {
     ASSOC_BUCKET: R2Bucket;
     DISCORD_CLIENT_ID: string;
     DISCORD_CLIENT_SECRET: string;
+    JWT_SECRET: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -62,6 +65,18 @@ app.get("/redirect", async (c) => {
                         }),
                 );
             }
+            const jwt = await sign(
+                {
+                    exp: Math.floor(Date.now() / 1000) + 1000,
+                },
+                c.env.JWT_SECRET,
+            );
+            setCookie(c, "JWT_AUTH", jwt, {
+                maxAge: 1000,
+                httpOnly: true,
+                sameSite: "Strict",
+                secure: true,
+            });
             return c.redirect("/done");
         },
     );
@@ -90,6 +105,22 @@ app.get("/members/:id", async (c) => {
         return c.notFound();
     }
     return c.json(await body.json<Member>());
+});
+
+app.use("/members/:id/associations", async (c, next) => {
+    const authCookie = getCookie(c, "JWT_AUTH");
+    if (!authCookie) {
+        return c.text("Unauthorized", 401);
+    }
+    const verification = await verify(authCookie, c.env.JWT_SECRET);
+    if (!verification) {
+        return c.text("Unauthorized", 401);
+    }
+    await next();
+});
+
+app.patch("/members/:id/associations", async () => {
+    // TODO
 });
 
 export default app;

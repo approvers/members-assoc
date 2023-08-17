@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@mikuroxina/mini-fn": "^4.1.1",
+        "@tsndr/cloudflare-worker-jwt": "^2.2.1",
         "hono": "^3.4.1"
     },
     "devDependencies": {
