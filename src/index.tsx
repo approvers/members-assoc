@@ -18,6 +18,7 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+app.get("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 app.use("/static/*", serveStatic({ root: "./" }));
 app.get("/", (c) => c.html(<Index requestUrl={c.req.url} />));
 app.get("/done", (c) => c.html(<Done />));
