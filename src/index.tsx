@@ -6,7 +6,7 @@ import { getCookie, setCookie } from "hono/cookie";
 
 import { withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
-import { checkAppError, type Member } from "./models";
+import { AssociatedLinksSchema, checkAppError, type Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
 import { Error } from "./pages/error";
@@ -119,8 +119,42 @@ app.use("/members/:id/associations", async (c, next) => {
     await next();
 });
 
-app.patch("/members/:id/associations", async () => {
-    // TODO
+app.put("/members/:id/associations", async (c) => {
+    const id = c.req.param("id");
+    const reqBody = await c.req.parseBody();
+    const result = AssociatedLinksSchema.safeParse(reqBody);
+    if (!result.success) {
+        return c.text("Bad Request", 400);
+    }
+    const entry = await c.env.ASSOC_BUCKET.get(id);
+    if (!entry) {
+        return c.text("Not Found", 404);
+    }
+    const member = await entry.json<Member>();
+    await c.env.ASSOC_BUCKET.put(
+        id,
+        JSON.stringify({
+            ...member,
+            associatedLinks: result.data,
+        }),
+    );
+    return c.text("OK", 200);
+});
+app.delete("/members/:id/associations", async (c) => {
+    const id = c.req.param("id");
+    const entry = await c.env.ASSOC_BUCKET.get(id);
+    if (!entry) {
+        return c.text("Not Found", 404);
+    }
+    const member = await entry.json<Member>();
+    await c.env.ASSOC_BUCKET.put(
+        id,
+        JSON.stringify({
+            ...member,
+            associatedLinks: [],
+        }),
+    );
+    return c.text("OK", 200);
 });
 
 export default app;
