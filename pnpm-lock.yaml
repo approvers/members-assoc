@@ -14,6 +14,9 @@ dependencies:
   hono:
     specifier: ^3.4.1
     version: 3.4.1
+  zod:
+    specifier: ^3.22.1
+    version: 3.22.1
 
 devDependencies:
   '@cloudflare/workers-types':
@@ -2574,4 +2577,3 @@ packages:
 
   /zod@3.22.1:
     resolution: {integrity: sha512-+qUhAMl414+Elh+fRNtpU+byrwjDFOS1N7NioLY+tSlcADTx4TkCUua/hxJvxwDXcV4397/nZ420jy4n4+3WUg==}
-    dev: true
