@@ -13,10 +13,13 @@ export const AssociatedLinkSchema = z.object({
 });
 export type AssociatedLink = z.infer<typeof AssociatedLinkSchema>;
 
+export const AssociatedLinksSchema = z.array(AssociatedLinkSchema);
+export type AssociatedLinks = z.infer<typeof AssociatedLinksSchema>;
+
 export const MemberSchema = z.object({
     discordId: z.string(),
     username: z.string(),
-    associatedLinks: z.array(AssociatedLinkSchema),
+    associatedLinks: AssociatedLinksSchema,
 });
 export type Member = z.infer<typeof MemberSchema>;
 
