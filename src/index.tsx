@@ -103,7 +103,7 @@ app.use("/members/:id/associations", async (c, next) => {
     if (!auth || !auth.startsWith("Bearer ")) {
         return c.text("Unauthorized", 401);
     }
-    const token = auth.substring(7);
+    const token = auth.substring(6).trim();
     const member = await newRepo(token).guildMember(APPROVERS_GUILD_ID);
     if (!member || member.roles.length === 0) {
         return c.text("Not Found", 404);
