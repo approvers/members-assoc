@@ -78,6 +78,14 @@ paths:
             summary: "Deletes all associated links."
             tags: ["associations"]
             deprecated: false
+            parameters:
+                - in: header
+                  name: "Authorization"
+                  description: "Discord OAuth token, which has scope of `identify` and `guilds.members.read`."
+                  deprecated: false
+                  required: true
+                  schema: { type: string }
+                  example: "Bearer <oauth-token>"
 
 components:
     schemas:
