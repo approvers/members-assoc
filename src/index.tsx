@@ -1,11 +1,10 @@
 import { Result } from "@mikuroxina/mini-fn";
-import { sign, verify } from "@tsndr/cloudflare-worker-jwt";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
-import { getCookie, setCookie } from "hono/cookie";
 
-import { withDiscordRepository } from "./adaptors/discord";
+import { newRepo, withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
+import { APPROVERS_GUILD_ID } from "./consts";
 import { AssociatedLinksSchema, checkAppError, type Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
@@ -19,7 +18,12 @@ type Bindings = {
     JWT_SECRET: string;
 };
 
-const app = new Hono<{ Bindings: Bindings }>();
+type Variables = {
+    oauthToken: string;
+    member: Member;
+};
+
+const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 app.get("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 app.use("/static/*", serveStatic({ root: "./" }));
@@ -65,18 +69,6 @@ app.get("/redirect", async (c) => {
                         }),
                 );
             }
-            const jwt = await sign(
-                {
-                    exp: Math.floor(Date.now() / 1000) + 1000,
-                },
-                c.env.JWT_SECRET,
-            );
-            setCookie(c, "JWT_AUTH", jwt, {
-                maxAge: 1000,
-                httpOnly: true,
-                sameSite: "Strict",
-                secure: true,
-            });
             return c.redirect("/done");
         },
     );
@@ -108,33 +100,37 @@ app.get("/members/:id", async (c) => {
 });
 
 app.use("/members/:id/associations", async (c, next) => {
-    const authCookie = getCookie(c, "JWT_AUTH");
-    if (!authCookie) {
+    const auth = c.req.header("Authorization");
+    if (!auth || !auth.startsWith("Bearer ")) {
         return c.text("Unauthorized", 401);
     }
-    const verification = await verify(authCookie, c.env.JWT_SECRET);
-    if (!verification) {
-        return c.text("Unauthorized", 401);
+    const token = auth.substring(7);
+    const member = await newRepo(token).guildMember(APPROVERS_GUILD_ID);
+    if (!member || member.roles.length === 0) {
+        return c.text("Not Found", 404);
     }
+    c.set("oauthToken", token);
+
+    const id = c.req.param("id");
+    const entry = await c.env.ASSOC_BUCKET.get(id);
+    if (!entry) {
+        return c.text("Not Found", 404);
+    }
+    const stored = await entry.json<Member>();
+    c.set("member", stored);
     await next();
 });
 
 app.put("/members/:id/associations", async (c) => {
     const id = c.req.param("id");
-    const reqBody = await c.req.parseBody();
-    const result = AssociatedLinksSchema.safeParse(reqBody);
+    const result = AssociatedLinksSchema.safeParse(await c.req.parseBody());
     if (!result.success) {
         return c.text("Bad Request", 400);
     }
-    const entry = await c.env.ASSOC_BUCKET.get(id);
-    if (!entry) {
-        return c.text("Not Found", 404);
-    }
-    const member = await entry.json<Member>();
     await c.env.ASSOC_BUCKET.put(
         id,
         JSON.stringify({
-            ...member,
+            ...c.get("member"),
             associatedLinks: result.data,
         }),
     );
@@ -142,15 +138,10 @@ app.put("/members/:id/associations", async (c) => {
 });
 app.delete("/members/:id/associations", async (c) => {
     const id = c.req.param("id");
-    const entry = await c.env.ASSOC_BUCKET.get(id);
-    if (!entry) {
-        return c.text("Not Found", 404);
-    }
-    const member = await entry.json<Member>();
     await c.env.ASSOC_BUCKET.put(
         id,
         JSON.stringify({
-            ...member,
+            ...c.get("member"),
             associatedLinks: [],
         }),
     );
