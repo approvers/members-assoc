@@ -14,7 +14,7 @@ export const withDiscordRepository =
 
 const DISCORD_API = "https://discord.com/api/v10";
 
-const newRepo = (token: string): Repository => ({
+export const newRepo = (token: string): Repository => ({
     async user(): Promise<User> {
         const meRes = await fetch(DISCORD_API + "/users/@me", {
             headers: {
