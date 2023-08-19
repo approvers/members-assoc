@@ -60,11 +60,11 @@ paths:
             parameters:
                 - in: header
                   name: "Authorization"
-                  description: "Authentication JWT."
+                  description: "Discord OAuth token, which has scope of `identify` and `guilds.members.read`."
                   deprecated: false
                   required: true
                   schema: { type: string }
-                  example: "Bearer <json-web-token>"
+                  example: "Bearer <oauth-token>"
             requestBody:
                 description: "List of association link."
                 required: true
