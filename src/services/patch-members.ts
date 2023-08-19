@@ -1,5 +1,6 @@
 import { Result } from "@mikuroxina/mini-fn";
 
+import { APPROVERS_GUILD_ID } from "../consts";
 import { type AppError, AssociatedLinkSchema, type Member } from "../models";
 
 export interface User {
@@ -23,8 +24,6 @@ export interface Repository {
 export interface Store {
     put(id: string, entry: unknown): Promise<void>;
 }
-
-const APPROVERS_GUILD_ID = "683939861539192860";
 
 export const patchMembers = async (
     repository: Repository,
