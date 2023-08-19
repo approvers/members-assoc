@@ -15,7 +15,6 @@ type Bindings = {
     ASSOC_BUCKET: R2Bucket;
     DISCORD_CLIENT_ID: string;
     DISCORD_CLIENT_SECRET: string;
-    JWT_SECRET: string;
 };
 
 type Variables = {
