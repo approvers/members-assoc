@@ -1,6 +1,7 @@
 import { Result } from "@mikuroxina/mini-fn";
 
-import { type AppError, checkAssociationLink, type Member } from "../models";
+import { APPROVERS_GUILD_ID } from "../consts";
+import { type AppError, AssociatedLinkSchema, type Member } from "../models";
 
 export interface User {
     id: string;
@@ -24,8 +25,6 @@ export interface Store {
     put(id: string, entry: unknown): Promise<void>;
 }
 
-const APPROVERS_GUILD_ID = "683939861539192860";
-
 export const patchMembers = async (
     repository: Repository,
     store: Store,
@@ -40,9 +39,13 @@ export const patchMembers = async (
     const member = {
         discordId: me.id,
         username: me.username,
-        associatedLinks: connections
-            .map(({ type, id, name }) => ({ type, id, name }))
-            .filter(checkAssociationLink),
+        associatedLinks: connections.flatMap((obj) => {
+            const result = AssociatedLinkSchema.safeParse(obj);
+            if (!result.success) {
+                return [];
+            }
+            return [result.data];
+        }),
     } satisfies Member;
 
     store.put(me.id, member);

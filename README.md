@@ -22,21 +22,13 @@ API とは別に登録処理用の簡易的な画面を `/` (ルート) で用�
 
 `GET /members/{id}` は特定のメンバーのみの情報 1 件を取得できます. 存在しない場合は `404 Not Found` を返します.
 
-:::note
-これより下は執筆中であり, 情報が不完全です. 大きく変更される可能性もあります.
-:::
-
 ### 関連付け情報
 
-`GET /members/{id}/associations`
+以下のエンドポイントは, ヘッダーに `Authorization: Bearer <oauth-token>` の形式の認証情報が必要です. この `<oauth-token>` は Discord の OAuth トークンであり, これには `identify` と `guilds.members.read` の scope が付与されている必要があります.
 
-`POST /members/{id}/associations`
+`PUT /members/{id}/associations` は特定のメンバーに関連付けられたアカウント情報を, リクエスト本文のリストで上書きします. スキーマの詳細は openapi.yaml を確認してください.
 
-`PUT /members/{id}/associations`
-
-`PATCH /members/{id}/associations`
-
-`DELETE /members/{id}/associations`
+`DELETE /members/{id}/associations` は特定のメンバーに関連付けられたアカウント情報をすべて削除します.
 
 ## 構築基盤
 

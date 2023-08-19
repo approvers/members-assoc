@@ -1,25 +1,27 @@
-const ASSOCIATION_TYPES = ["twitter", "github"] as const;
+import { z } from "zod";
 
-export type AssociationType = (typeof ASSOCIATION_TYPES)[number];
-export const checkAssociationType = (type: string): type is AssociationType =>
-    (ASSOCIATION_TYPES as readonly string[]).includes(type);
+export const AssociationSchema = z.union([
+    z.literal("twitter"),
+    z.literal("github"),
+]);
+export type Association = z.infer<typeof AssociationSchema>;
 
-export interface AssociatedLink {
-    type: AssociationType;
-    id: string;
-    name: string;
-}
-export const checkAssociationLink = (link: {
-    type: string;
-    id: string;
-    name: string;
-}): link is AssociatedLink => checkAssociationType(link.type);
+export const AssociatedLinkSchema = z.object({
+    type: AssociationSchema,
+    id: z.string(),
+    name: z.string(),
+});
+export type AssociatedLink = z.infer<typeof AssociatedLinkSchema>;
 
-export interface Member {
-    discordId: string;
-    username: string;
-    associatedLinks: AssociatedLink[];
-}
+export const AssociatedLinksSchema = z.array(AssociatedLinkSchema);
+export type AssociatedLinks = z.infer<typeof AssociatedLinksSchema>;
+
+export const MemberSchema = z.object({
+    discordId: z.string(),
+    username: z.string(),
+    associatedLinks: AssociatedLinksSchema,
+});
+export type Member = z.infer<typeof MemberSchema>;
 
 const APP_ERRORS = ["NOT_JOINED_TO_APPROVERS"] as const;
 export type AppError = (typeof APP_ERRORS)[number];

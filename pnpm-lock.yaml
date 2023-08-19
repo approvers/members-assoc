@@ -8,9 +8,15 @@ dependencies:
   '@mikuroxina/mini-fn':
     specifier: ^4.1.1
     version: 4.1.1
+  '@tsndr/cloudflare-worker-jwt':
+    specifier: ^2.2.1
+    version: 2.2.1
   hono:
     specifier: ^3.4.1
     version: 3.4.1
+  zod:
+    specifier: ^3.22.1
+    version: 3.22.1
 
 devDependencies:
   '@cloudflare/workers-types':
@@ -403,6 +409,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@tsndr/cloudflare-worker-jwt@2.2.1:
+    resolution: {integrity: sha512-yYxjmag5AXXs7FDCUlse8cCTQlug3fbrqUb4/s4kvdauOg5wq2V6BayHD/OUWOGmgohefFRqu4vA5phU3+Cyng==}
+    dev: false
 
   /@types/json-schema@7.0.12:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
@@ -2567,4 +2577,3 @@ packages:
 
   /zod@3.22.1:
     resolution: {integrity: sha512-+qUhAMl414+Elh+fRNtpU+byrwjDFOS1N7NioLY+tSlcADTx4TkCUua/hxJvxwDXcV4397/nZ420jy4n4+3WUg==}
-    dev: true
