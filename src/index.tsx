@@ -122,7 +122,7 @@ app.use("/members/:id/associations", async (c, next) => {
 
 app.put("/members/:id/associations", async (c) => {
     const id = c.req.param("id");
-    const result = AssociatedLinksSchema.safeParse(await c.req.parseBody());
+    const result = AssociatedLinksSchema.safeParse(await c.req.json());
     if (!result.success) {
         return c.text("Bad Request", 400);
     }
