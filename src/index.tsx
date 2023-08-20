@@ -1,6 +1,7 @@
 import { Result } from "@mikuroxina/mini-fn";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
+import { cors } from "hono/cors";
 
 import { newRepo, withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
@@ -72,6 +73,18 @@ app.get("/redirect", async (c) => {
         },
     );
 });
+
+app.use(
+    "/*",
+    cors({
+        origin: [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "https://edit.members.approvers.dev",
+        ],
+        allowMethods: ["GET", "PUT", "DELETE", "OPTIONS"],
+    }),
+);
 
 app.get("/members", async (c) => {
     const { objects } = await c.env.ASSOC_BUCKET.list();
