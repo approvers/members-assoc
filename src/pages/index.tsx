@@ -22,6 +22,14 @@ export const Index = ({ requestUrl }: { requestUrl: string }): JSX.Element => {
             >
                 アカウント情報を登録する
             </a>
+            <hr />
+            <a
+                href="https://edit.members.approvers.dev"
+                referrerPolicy="no-referrer"
+                rel="noopener"
+            >
+                アカウント情報を編集する (別サイト)
+            </a>
         </Layout>
     );
 };
