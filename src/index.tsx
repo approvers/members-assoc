@@ -112,6 +112,10 @@ app.get("/members/:id", async (c) => {
 });
 
 app.use("/members/:id/associations", async (c, next) => {
+    if (c.req.method === "GET") {
+        return next();
+    }
+
     const auth = c.req.header("Authorization");
     if (!auth || !auth.startsWith("Bearer ")) {
         return c.text("Unauthorized", 401);
