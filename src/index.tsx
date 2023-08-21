@@ -144,7 +144,12 @@ app.use("/members/:id/associations", async (c, next) => {
 });
 
 app.get("/members/:id/associations", async (c) => {
-    return c.json(c.get("member").associatedLinks);
+    const id = c.req.param("id");
+    const entry = await c.env.ASSOC_BUCKET.get(id);
+    if (!entry) {
+        return c.json([]);
+    }
+    return c.json((await entry.json<Member>()).associatedLinks);
 });
 app.put("/members/:id/associations", async (c) => {
     const id = c.req.param("id");
