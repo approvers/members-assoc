@@ -53,6 +53,21 @@ paths:
                 404:
                     description: "Not Found"
     /members/{discordId}/associations:
+        get:
+            summary: "Retrieves associated links."
+            tags: ["associations"]
+            deprecated: false
+            responses:
+                200:
+                    description: "Links list"
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/AssociatedLink"
+                404:
+                    description: "Not Found"
         put:
             summary: "Replaces associated links with the given list."
             tags: ["associations"]

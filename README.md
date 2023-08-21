@@ -24,6 +24,8 @@ API とは別に登録処理用の簡易的な画面を `/` (ルート) で用�
 
 ### 関連付け情報
 
+`GET /members/{id}/associations` は特定のメンバーに関連付けられたアカウント情報のリストを取得します.
+
 以下のエンドポイントは, ヘッダーに `Authorization: Bearer <oauth-token>` の形式の認証情報が必要です. この `<oauth-token>` は Discord の OAuth トークンであり, これには `identify` と `guilds.members.read` の scope が付与されている必要があります.
 
 `PUT /members/{id}/associations` は特定のメンバーに関連付けられたアカウント情報を, リクエスト本文のリストで上書きします. スキーマの詳細は openapi.yaml を確認してください.
