@@ -143,7 +143,7 @@ app.use("/members/:id/associations", async (c, next) => {
     await next();
 });
 
-app.put("/members/:id/associations", async (c) => {
+app.get("/members/:id/associations", async (c) => {
     return c.json(c.get("member").associatedLinks);
 });
 app.put("/members/:id/associations", async (c) => {
