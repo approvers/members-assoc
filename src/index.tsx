@@ -5,7 +5,6 @@ import { cors } from "hono/cors";
 
 import { newRepo, withDiscordRepository } from "./adaptors/discord";
 import { R2Store } from "./adaptors/r2";
-import { APPROVERS_GUILD_ID } from "./consts";
 import { AssociatedLinksSchema, checkAppError, type Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
@@ -120,17 +119,24 @@ app.use("/members/:id/associations", async (c, next) => {
     if (!auth || !auth.startsWith("Bearer ")) {
         return c.text("Unauthorized", 401);
     }
-    const token = auth.substring(6).trim();
-    const member = await newRepo(token).guildMember(APPROVERS_GUILD_ID);
-    if (!member || member.roles.length === 0) {
-        return c.text("Not Found", 404);
-    }
+    const token = auth.substring("Bearer ".length).trim();
+
     c.set("oauthToken", token);
 
     const id = c.req.param("id");
-    const entry = await c.env.ASSOC_BUCKET.get(id);
+    let entry = await c.env.ASSOC_BUCKET.get(id);
     if (!entry) {
-        return c.text("Not Found", 404);
+        const repo = newRepo(token);
+        const store = new R2Store(c.env.ASSOC_BUCKET);
+        const result = await patchMembers(repo, store);
+        if (Result.isErr(result)) {
+            return c.text("Forbidden", 403);
+        }
+        entry = await c.env.ASSOC_BUCKET.get(id);
+    }
+    if (!entry) {
+        console.error("insert new member failure");
+        return c.text("Internal Server Error", 500);
     }
     const stored = await entry.json<Member>();
     c.set("member", stored);
