@@ -13,7 +13,7 @@
         "@mikuroxina/mini-fn": "^4.1.1",
         "@tsndr/cloudflare-worker-jwt": "^2.2.1",
         "hono": "^3.4.1",
-        "zod": "^3.22.1"
+        "zod": "^3.22.3"
     },
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20230628.0",
