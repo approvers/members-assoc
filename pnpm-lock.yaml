@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@mikuroxina/mini-fn':
-    specifier: ^4.1.1
-    version: 4.1.1
+    specifier: ^5.0.0
+    version: 5.1.0
   '@tsndr/cloudflare-worker-jwt':
     specifier: ^2.2.1
     version: 2.2.1
@@ -390,8 +390,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@mikuroxina/mini-fn@4.1.1:
-    resolution: {integrity: sha512-h+GtOjFPQT4Xx3kk5alJRFRiuIqC54m/QB2uexNTQLwfBYkHZkDDYyxONSrRUHjXwIv/oenOv7dpyR0TMqr1NA==}
+  /@mikuroxina/mini-fn@5.1.0:
+    resolution: {integrity: sha512-NnbSIBbf2kadmawA3+grEfjvINeTMYcv7Vn+Aw5i81dCVfF4U0Qkq7WaB1NIoYJVCb1sTReytUPbStAWz0PlaQ==}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:

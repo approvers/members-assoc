@@ -10,7 +10,7 @@
         "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc --noEmit"
     },
     "dependencies": {
-        "@mikuroxina/mini-fn": "^4.1.1",
+        "@mikuroxina/mini-fn": "^5.0.0",
         "@tsndr/cloudflare-worker-jwt": "^2.2.1",
         "hono": "^3.4.1",
         "zod": "^3.22.3"
