@@ -12,7 +12,7 @@
     "dependencies": {
         "@mikuroxina/mini-fn": "^5.4.3",
         "@tsndr/cloudflare-worker-jwt": "^2.3.2",
-        "hono": "^3.10.3",
+        "hono": "^3.11.7",
         "zod": "^3.22.4"
     },
     "devDependencies": {
