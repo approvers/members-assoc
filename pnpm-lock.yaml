@@ -10,7 +10,7 @@ dependencies:
     version: 5.6.0
   '@tsndr/cloudflare-worker-jwt':
     specifier: ^2.3.2
-    version: 2.5.2
+    version: 2.5.3
   hono:
     specifier: ^3.11.7
     version: 3.12.12
@@ -438,8 +438,8 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@tsndr/cloudflare-worker-jwt@2.5.2:
-    resolution: {integrity: sha512-i04TCTepgaqZCL9GJsNknkBphVOK8vspOl/HvAeVzpZ4aWiIzyrGwSUsoUnLxE60Oh70t5N1YIADQEaOdzFYgA==}
+  /@tsndr/cloudflare-worker-jwt@2.5.3:
+    resolution: {integrity: sha512-zbdvjRG86y/ObiBgTJrzBC39t2FcaeGwB6AV7VO4LvHKJNyZvLYRbKT68eaoJhnJldyHhs7yZ69neRVdUd9knA==}
     dev: false
 
   /@types/json-schema@7.0.15:
