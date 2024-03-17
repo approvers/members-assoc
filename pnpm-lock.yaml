@@ -48,7 +48,7 @@ devDependencies:
     version: 5.4.2
   wrangler:
     specifier: ^3.19.0
-    version: 3.33.0(@cloudflare/workers-types@4.20240312.0)
+    version: 3.34.1(@cloudflare/workers-types@4.20240312.0)
 
 packages:
 
@@ -946,7 +946,7 @@ packages:
       has-property-descriptors: 1.0.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.1
+      hasown: 2.0.2
       internal-slot: 1.0.7
       is-array-buffer: 3.0.4
       is-callable: 1.2.7
@@ -1012,13 +1012,13 @@ packages:
     dependencies:
       get-intrinsic: 1.2.4
       has-tostringtag: 1.0.2
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /es-shim-unscopables@1.0.2:
     resolution: {integrity: sha512-J3yBRXCzDu4ULnQwxyToo/OjdMx6akgVC7K6few0a7F/0wLtmKKN7I73AH5T2836UuXRqN7Qg+IIUw/+YJksRw==}
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /es-to-primitive@1.2.1:
@@ -1319,7 +1319,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /get-source@2.0.12:
@@ -1435,8 +1435,8 @@ packages:
       has-symbols: 1.0.3
     dev: true
 
-  /hasown@2.0.1:
-    resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
+  /hasown@2.0.2:
+    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
@@ -1481,7 +1481,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       es-errors: 1.3.0
-      hasown: 2.0.1
+      hasown: 2.0.2
       side-channel: 1.0.6
     dev: true
 
@@ -1529,7 +1529,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /is-date-object@1.0.5:
@@ -1766,8 +1766,8 @@ packages:
     hasBin: true
     dev: true
 
-  /miniflare@3.20240304.1:
-    resolution: {integrity: sha512-U9Br62mV//dI5IiNxGX3qOf6/3tVGsWe94TF+Hy23F5w41AwF+cIgbGW4/JAQQI1rY5uNNmMoS9jqIyoSdw06Q==}
+  /miniflare@3.20240304.2:
+    resolution: {integrity: sha512-yQ5TBKv7TlvF8khFvvH+1WWk8cBnaLgNzcbJ5DLQOdecxdDxUCVlN38HThd6Nhcz6EY+ckDkww8FkugUbSSpIQ==}
     engines: {node: '>=16.13'}
     hasBin: true
     dependencies:
@@ -2455,8 +2455,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20240304.0
     dev: true
 
-  /wrangler@3.33.0(@cloudflare/workers-types@4.20240312.0):
-    resolution: {integrity: sha512-1A8frPJSUQjkWAN4XhbykpEtqmfDYdTWPKlc4rTchNrERLwqHF87aCYblP4m5Wm43w4eVL+H4hGUgE2TySk9MA==}
+  /wrangler@3.34.1(@cloudflare/workers-types@4.20240312.0):
+    resolution: {integrity: sha512-/h/tPXmIv2m8HcWpTHVpPtrXrRMkzEHGvMbdYL2g5VYzyzmT6ouXTKYUUTG26D+FryhzpszUBYJvd2BTAi3ObA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -2472,7 +2472,7 @@ packages:
       blake3-wasm: 2.1.5
       chokidar: 3.6.0
       esbuild: 0.17.19
-      miniflare: 3.20240304.1
+      miniflare: 3.20240304.2
       nanoid: 3.3.7
       path-to-regexp: 6.2.1
       resolve: 1.22.8
