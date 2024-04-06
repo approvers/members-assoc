@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@mikuroxina/mini-fn':
     specifier: ^5.4.3
-    version: 5.6.0
+    version: 5.7.0
   '@tsndr/cloudflare-worker-jwt':
     specifier: ^2.3.2
     version: 2.5.3
@@ -413,8 +413,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@mikuroxina/mini-fn@5.6.0:
-    resolution: {integrity: sha512-59ITWAiOseYGQfX1CoKU83rdxkuhTDG5VcXvGX/a1rd6OvcrwcfFBukFjffqsNbwLkPVR5sLa4aECfaxTuyeLw==}
+  /@mikuroxina/mini-fn@5.7.0:
+    resolution: {integrity: sha512-dUc1Te2alRMbbgAgK701DojTfaVh4q3OIcm7sgDCPmwTsCndtNJOiDpVHkq2W++fY19QyC8FNHGyr7agtFAGKw==}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
