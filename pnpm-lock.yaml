@@ -22,12 +22,9 @@ devDependencies:
   '@cloudflare/workers-types':
     specifier: ^4.20231121.0
     version: 4.20240405.0
-  '@typescript-eslint/eslint-plugin':
-    specifier: ^7.0.0
-    version: 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@9.0.0)(typescript@5.4.5)
-  '@typescript-eslint/parser':
-    specifier: ^7.0.0
-    version: 7.6.0(eslint@9.0.0)(typescript@5.4.5)
+  '@eslint/js':
+    specifier: ^9.0.0
+    version: 9.0.0
   eslint:
     specifier: ^9.0.0
     version: 9.0.0
@@ -40,12 +37,18 @@ devDependencies:
   eslint-plugin-simple-import-sort:
     specifier: ^12.0.0
     version: 12.0.0(eslint@9.0.0)
+  globals:
+    specifier: ^15.0.0
+    version: 15.0.0
   prettier:
     specifier: ^3.1.0
     version: 3.2.5
   typescript:
     specifier: ^5.3.2
     version: 5.4.5
+  typescript-eslint:
+    specifier: ^7.6.0
+    version: 7.6.0(eslint@9.0.0)(typescript@5.4.5)
   wrangler:
     specifier: ^3.19.0
     version: 3.49.0(@cloudflare/workers-types@4.20240405.0)
@@ -1400,6 +1403,11 @@ packages:
     engines: {node: '>=18'}
     dev: true
 
+  /globals@15.0.0:
+    resolution: {integrity: sha512-m/C/yR4mjO6pXDTm9/R/SpYTAIyaUB4EOzcaaMEl7mds7Mshct9GfejiJNQGjHHbdMPey13Kpu4TMbYi9ex1pw==}
+    engines: {node: '>=18'}
+    dev: true
+
   /globalthis@1.0.3:
     resolution: {integrity: sha512-sFdI5LyBiNTHjRd7cGPWapiHWMOXKyuBNX/cWJ3NfzrZQVa8GI/8cofCl74AOVqq9W5kNmguTIzJ/1s2gyI9wA==}
     engines: {node: '>= 0.4'}
@@ -2408,6 +2416,25 @@ packages:
       has-proto: 1.0.3
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
+    dev: true
+
+  /typescript-eslint@7.6.0(eslint@9.0.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-LY6vH6F1l5jpGqRtU+uK4+mOecIb4Cd4kaz1hAiJrgnNiHUA8wiw8BkJyYS+MRLM69F1QuSKwtGlQqnGl1Rc6w==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      eslint: ^8.56.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@9.0.0)(typescript@5.4.5)
+      '@typescript-eslint/parser': 7.6.0(eslint@9.0.0)(typescript@5.4.5)
+      '@typescript-eslint/utils': 7.6.0(eslint@9.0.0)(typescript@5.4.5)
+      eslint: 9.0.0
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /typescript@5.4.5:
