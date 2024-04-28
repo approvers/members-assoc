@@ -9,8 +9,8 @@ import { AssociatedLinksSchema, checkAppError, type Member } from "./models";
 import { Index } from "./pages";
 import { Done } from "./pages/done";
 import { Error } from "./pages/error";
-import { patchMembers } from "./services/patch-members";
 import type { Repository } from "./services";
+import { patchMembers } from "./services/patch-members";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
