@@ -9,6 +9,8 @@
         "types": ["@cloudflare/workers-types"],
         "jsx": "react-jsx",
         "jsxImportSource": "hono/jsx",
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+        "noEmit": true,
+        "skipLibCheck": true
     }
 }
