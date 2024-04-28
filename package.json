@@ -7,10 +7,10 @@
         "deploy": "wrangler deploy --minify src/index.tsx",
         "lint": "eslint \"src/**/*.{ts,tsx}\"",
         "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-        "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc --noEmit"
+        "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc -p ."
     },
     "dependencies": {
-        "@mikuroxina/mini-fn": "^5.4.3",
+        "@mikuroxina/mini-fn": "^6.0.0",
         "@tsndr/cloudflare-worker-jwt": "^2.3.2",
         "hono": "^3.11.7",
         "zod": "^3.22.4"
