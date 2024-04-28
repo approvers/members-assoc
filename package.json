@@ -7,7 +7,7 @@
         "deploy": "wrangler deploy --minify src/index.tsx",
         "lint": "eslint \"src/**/*.{ts,tsx}\"",
         "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-        "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc --noEmit"
+        "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc -p ."
     },
     "dependencies": {
         "@mikuroxina/mini-fn": "^6.0.0",
