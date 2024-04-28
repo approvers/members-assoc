@@ -10,6 +10,7 @@ import { Index } from "./pages";
 import { Done } from "./pages/done";
 import { Error } from "./pages/error";
 import { patchMembers } from "./services/patch-members";
+import type { Repository } from "./services";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
@@ -58,7 +59,7 @@ app.get("/redirect", async (c) => {
 
     const store = new R2Store(c.env.ASSOC_BUCKET);
     return await withDiscordRepository<Response>(json.access_token)(
-        async (repo) => {
+        async (repo: Repository) => {
             const result = await patchMembers(repo, store);
             if (Result.isErr(result)) {
                 return c.redirect(
