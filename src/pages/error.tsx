@@ -1,3 +1,5 @@
+import type { JSX } from "hono/jsx/jsx-runtime";
+
 import { Layout } from "../components/layout";
 import type { AppError } from "../models";
 

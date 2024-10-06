@@ -1,3 +1,5 @@
+import type { JSX } from "hono/jsx/jsx-runtime";
+
 import { Layout } from "../components/layout";
 
 export const Index = ({ requestUrl }: { requestUrl: string }): JSX.Element => {
