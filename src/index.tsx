@@ -1,3 +1,4 @@
+import manifest from "__STATIC_CONTENT_MANIFEST";
 import { Result } from "@mikuroxina/mini-fn";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
@@ -25,8 +26,8 @@ type Variables = {
 
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
-app.get("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
-app.use("/static/*", serveStatic({ root: "./" }));
+app.get("/favicon.ico", serveStatic({ path: "./favicon.ico", manifest }));
+app.use("/static/*", serveStatic({ root: "./", manifest }));
 app.get("/", (c) => c.html(<Index requestUrl={c.req.url} />));
 app.get("/done", (c) => c.html(<Done />));
 app.get("/error", (c) => {
