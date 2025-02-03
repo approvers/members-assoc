@@ -18,7 +18,7 @@
         "@cloudflare/workers-types": "^4.20231121.0",
         "@eslint/js": "^9.0.0",
         "eslint": "^9.0.0",
-        "eslint-config-prettier": "^9.0.0",
+        "eslint-config-prettier": "^10.0.0",
         "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-simple-import-sort": "^12.0.0",
         "globals": "^15.0.0",
