@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@mikuroxina/mini-fn':
         specifier: ^6.0.0
-        version: 6.7.0
+        version: 6.8.0
       hono:
         specifier: ^4.0.0
         version: 4.7.2
@@ -417,8 +417,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@mikuroxina/mini-fn@6.7.0':
-    resolution: {integrity: sha512-MHXlDpiJYIomov57vgCSAdTZbNMVGHoNTbEeZJtShDrWmohuqsIQ2ZBu0GXZ6Co/fowQw16hMti/PM0vXiFDTQ==}
+  '@mikuroxina/mini-fn@6.8.0':
+    resolution: {integrity: sha512-F2zCVBwIKERxuEyQGjxlzQjmrQ2oHOQSdnYJP2LKfcZivGq5n0IziJUiBHipduItSbsYH59cKexVBwSl//O6gQ==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1731,7 +1731,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mikuroxina/mini-fn@6.7.0': {}
+  '@mikuroxina/mini-fn@6.8.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
