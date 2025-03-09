@@ -10,7 +10,7 @@
         "check": "prettier --check \"src/**/*.{ts,tsx}\" && tsc -p ."
     },
     "dependencies": {
-        "@mikuroxina/mini-fn": "^6.0.0",
+        "@mikuroxina/mini-fn": "^7.0.0",
         "hono": "^4.0.0",
         "zod": "^3.22.4"
     },
