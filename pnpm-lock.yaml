@@ -16,7 +16,7 @@ importers:
         version: 4.9.7
       zod:
         specifier: ^4.0.0
-        version: 4.1.7
+        version: 4.1.9
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20231121.0
@@ -1489,8 +1489,8 @@ packages:
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
 
-  zod@4.1.7:
-    resolution: {integrity: sha512-6qi6UYyzAl7W9uV29KvcSFXqK4QCYNYUz2YASPNBWpJE1RY6R1nArmmFPgGY/CBYWzpeMw3EOER+DR9a05O4IA==}
+  zod@4.1.9:
+    resolution: {integrity: sha512-HI32jTq0AUAC125z30E8bQNz0RQ+9Uc+4J7V97gLYjZVKRjeydPgGt6dvQzFrav7MYOUGFqqOGiHpA/fdbd0cQ==}
 
 snapshots:
 
@@ -3119,4 +3119,4 @@ snapshots:
 
   zod@3.22.3: {}
 
-  zod@4.1.7: {}
+  zod@4.1.9: {}
