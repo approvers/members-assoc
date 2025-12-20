@@ -20,7 +20,7 @@ importers:
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20231121.0
-        version: 4.20251211.0
+        version: 4.20251217.0
       '@eslint/js':
         specifier: ^9.0.0
         version: 9.39.2
@@ -50,7 +50,7 @@ importers:
         version: 8.49.0(eslint@9.39.2)(typescript@5.9.3)
       wrangler:
         specifier: ^4.0.0
-        version: 4.54.0(@cloudflare/workers-types@4.20251211.0)
+        version: 4.54.0(@cloudflare/workers-types@4.20251217.0)
 
 packages:
 
@@ -97,8 +97,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@4.20251211.0':
-    resolution: {integrity: sha512-e87o6KbelCz7dnI5ngrGT2ca15vJZ+COb2eqJ52iDHmOaujyC6aYZ71e2vor8X6V9T6tcDElC5sAqPR93j09EA==}
+  '@cloudflare/workers-types@4.20251217.0':
+    resolution: {integrity: sha512-qdVSqCza5Bv23E0DFET+8SEl9fM1F16WHC0HGoYLlDAyWF7rK2HhkPCdUEOp8DsJXwANWvNOkFdJfE1kLYGHYg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1466,7 +1466,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20251210.0':
     optional: true
 
-  '@cloudflare/workers-types@4.20251211.0': {}
+  '@cloudflare/workers-types@4.20251217.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -2971,7 +2971,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20251210.0
       '@cloudflare/workerd-windows-64': 1.20251210.0
 
-  wrangler@4.54.0(@cloudflare/workers-types@4.20251211.0):
+  wrangler@4.54.0(@cloudflare/workers-types@4.20251217.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.1
       '@cloudflare/unenv-preset': 2.7.13(unenv@2.0.0-rc.24)(workerd@1.20251210.0)
@@ -2982,7 +2982,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20251210.0
     optionalDependencies:
-      '@cloudflare/workers-types': 4.20251211.0
+      '@cloudflare/workers-types': 4.20251217.0
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil
