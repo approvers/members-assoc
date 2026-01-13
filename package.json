@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@mikuroxina/mini-fn": "^7.0.0",
-        "hono": "^4.0.0",
+        "hono": "^4.11.4",
         "zod": "^4.0.0"
     },
     "devDependencies": {
