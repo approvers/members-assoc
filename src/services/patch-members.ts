@@ -1,7 +1,7 @@
 import { Result } from "@mikuroxina/mini-fn";
 
-import { APPROVERS_GUILD_ID } from "../consts";
-import { type AppError, AssociatedLinkSchema, type Member } from "../models";
+import { APPROVERS_GUILD_ID } from "../consts.js";
+import { type AppError, AssociatedLinkSchema, type Member } from "../models.js";
 
 export interface User {
     id: string;

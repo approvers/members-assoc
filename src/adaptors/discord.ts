@@ -1,7 +1,11 @@
 import { Cont, Promise } from "@mikuroxina/mini-fn";
 
-import type { Repository } from "../services";
-import type { Connection, GuildMember, User } from "../services/patch-members";
+import type { Repository } from "../services.js";
+import type {
+    Connection,
+    GuildMember,
+    User,
+} from "../services/patch-members.js";
 
 export const withDiscordRepository =
     <T>(token: string): Cont.ContT<T, Promise.PromiseHkt, Repository> =>
