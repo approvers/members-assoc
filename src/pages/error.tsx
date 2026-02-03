@@ -1,7 +1,7 @@
 import type { JSX } from "hono/jsx/jsx-runtime";
 
-import { Layout } from "../components/layout";
-import type { AppError } from "../models";
+import { Layout } from "../components/layout.js";
+import type { AppError } from "../models.js";
 
 const DESCRIPTIONS: Record<AppError, string> = {
     NOT_JOINED_TO_APPROVERS:

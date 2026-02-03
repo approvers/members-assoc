@@ -1,6 +1,6 @@
 import type { JSX } from "hono/jsx/jsx-runtime";
 
-import { Layout } from "../components/layout";
+import { Layout } from "../components/layout.js";
 
 export const Done = (): JSX.Element => (
     <Layout title="Approvers メンバー情報登録 - 登録完了">

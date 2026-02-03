@@ -1,6 +1,6 @@
 import type { JSX } from "hono/jsx/jsx-runtime";
 
-import { Layout } from "../components/layout";
+import { Layout } from "../components/layout.js";
 
 export const Index = ({ requestUrl }: { requestUrl: string }): JSX.Element => {
     const redirectUrl = `https://discord.com/api/oauth2/authorize?client_id=1141210184505639003&redirect_uri=${encodeURIComponent(

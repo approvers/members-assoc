@@ -4,14 +4,14 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
 import { cors } from "hono/cors";
 
-import { newRepo, withDiscordRepository } from "./adaptors/discord";
-import { R2Store } from "./adaptors/r2";
-import { AssociatedLinksSchema, checkAppError, type Member } from "./models";
-import { Index } from "./pages";
-import { Done } from "./pages/done";
-import { Error } from "./pages/error";
-import type { Repository } from "./services";
-import { patchMembers } from "./services/patch-members";
+import { newRepo, withDiscordRepository } from "./adaptors/discord.js";
+import { R2Store } from "./adaptors/r2.js";
+import { AssociatedLinksSchema, checkAppError, type Member } from "./models.js";
+import { Done } from "./pages/done.js";
+import { Error } from "./pages/error.js";
+import { Index } from "./pages/index.js";
+import type { Repository } from "./services.js";
+import { patchMembers } from "./services/patch-members.js";
 
 type Bindings = {
     ASSOC_BUCKET: R2Bucket;
