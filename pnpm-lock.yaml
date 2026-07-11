@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@mikuroxina/mini-fn':
         specifier: ^7.0.0
-        version: 7.2.0
+        version: 7.3.0
       hono:
         specifier: ^4.0.0
         version: 4.12.27
@@ -479,8 +479,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@mikuroxina/mini-fn@7.2.0':
-    resolution: {integrity: sha512-Hum4w0wSXA4onrBNSjvU0xpt0OugvbaotzyuhDW9zbmlV2YqXHUO/Yp/cPs3Kpe18DaBXT9soCNEAzr0ivY/vA==}
+  '@mikuroxina/mini-fn@7.3.0':
+    resolution: {integrity: sha512-5SaweMK5EAq5av1Idf+qNGppIiC42Pf/C+6aglVuzxjKnB/3/gOUSlR8zfLKMGvrYy/Yko8eHwvE8d9M5d41Zg==}
 
   '@poppinss/colors@4.1.6':
     resolution: {integrity: sha512-H9xkIdFswbS8n1d6vmRd8+c10t2Qe+rZITbbDHHkQixH5+2x1FDGmi/0K+WgWiqQFKPSlIYB7jlH6Kpfn6Fleg==}
@@ -1688,7 +1688,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@mikuroxina/mini-fn@7.2.0': {}
+  '@mikuroxina/mini-fn@7.3.0': {}
 
   '@poppinss/colors@4.1.6':
     dependencies:
